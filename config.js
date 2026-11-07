@@ -7,10 +7,10 @@ window.LOJA = {
   nome: "Doce Momento",
   slogan: "Brownies artesanais feitos com carinho",
   cidade: "Arcoverde - PE",
-  // Número informado: +55 87 9130-9425.
-  // ATENÇÃO: celular brasileiro exige 9 dígitos após o DDD; este possui 8.
-  // Confirme o dígito faltante antes de ativar pedidos por WhatsApp.
-  // Formato correto: "55879XXXXXXXX" (13 dígitos no total, sem espaços).
+  // Contato informado: +55 87 9130-9425 (8 dígitos locais).
+  // IMPORTANTE: confira se esse número está cadastrado no WhatsApp.
+  // Alguns números comerciais têm 8 dígitos; não acrescentamos um 9 sem confirmação.
+  // Formato: país 55 + DDD (2 dígitos) + número local (8 ou 9 dígitos).
   whatsapp: "558791309425",
   instagram: "",
 

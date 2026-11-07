@@ -11,8 +11,11 @@
   const validShipping = Number.isFinite(cfg.taxaEntrega) && cfg.taxaEntrega >= 0;
   const shipping = validShipping ? cfg.taxaEntrega : null;
   const whatsapp = String(cfg.whatsapp||'').replace(/\D/g, '');
-  // Segurança: não envia endereços de clientes para números brasileiros incompletos.
-  const whatsappValido = /^55[1-9]\d9\d{8}$/.test(whatsapp);
+  // Aceita números nacionais com DDD + 8 ou 9 dígitos.
+  // O número de 8 dígitos foi fornecido pelo proprietário e não é "corrigido" por suposição.
+  // A validação não confirma que o número tenha conta no WhatsApp.
+  const whatsappValido = /^55[1-9]\d\d{8,9}$/.test(whatsapp);
+  const whatsappOitoDigitos = /^55[1-9]\d\d{8}$/.test(whatsapp);
   let cart = {};
   let toastTimer;
   let orderId = '';
@@ -102,9 +105,11 @@
     $('#checkoutTotal').textContent = brl(subtotal()+(shipping||0));
     $('#pixPanel').hidden = true;
     $('#pixReady').hidden = true;
-    $('#orderHelp').textContent = whatsappValido
-      ? 'Você revisará a mensagem no WhatsApp antes de enviá-la.'
-      : 'WhatsApp da loja aguardando correção: confirme os 9 dígitos do celular após o DDD no arquivo config.js.';
+    $('#orderHelp').textContent = !whatsappValido
+      ? 'Confira o número do WhatsApp da loja no arquivo config.js.'
+      : whatsappOitoDigitos
+        ? 'O WhatsApp da loja foi informado com 8 dígitos após o DDD. O site tentará abrir a conversa com o número informado; confirme que ele está cadastrado no WhatsApp.'
+        : 'Você revisará a mensagem no WhatsApp antes de enviá-la.';
     openPanel(checkoutModal);
   }
 
@@ -163,7 +168,7 @@
   }
   function composeMessage(data) {
     const lines = products.filter(p => cart[p.id]).map(p => `• ${cart[p.id]}x ${p.nome} — ${brl(cart[p.id]*p.preco)}`);
-    const address = `${data.rua}, ${data.numero}${data.complemento?', '+data.complemento:''} — ${data.bairro} — ${cfg.cidade||'Arcoverde - PE'}${data.cep?' · CEP '+data.cep:''}`;
+    const address = `${data.rua}, ${data.numero}${data.complemento?', '+data.complemento:''} — ${data.bairro} — ${data.cidade||cfg.cidade||'Arcoverde - PE'}${data.cep?' · CEP '+data.cep:''}`;
     return [
       `🍫 *NOVA ENCOMENDA — ${cfg.nome||'Doce Momento'}*`,
       `Pedido: ${orderId}`,`Entrega prevista: ${plannedDelivery()}`,'',
@@ -176,6 +181,65 @@
       'Por favor, confirmem a disponibilidade, a entrega e os dados para pagamento. Obrigado!'
     ].filter(line => line !== null).join('\n');
   }
+
+  // Busca de endereço pelo CEP via ViaCEP. Somente os 8 dígitos do CEP vão ao serviço,
+  // nunca nome, telefone, número da casa ou complemento. Campos continuam editáveis.
+  const cepInput = $('#cepInput');
+  const cepStatus = $('#cepStatus');
+  const addressForm = $('#orderForm');
+  let cepAbort = null;
+  let ultimoCepConsultado = '';
+  const setCepStatus = (msg, status='') => {
+    cepStatus.textContent = msg;
+    cepStatus.dataset.status = status;
+  };
+  const cepDigits = () => cepInput.value.replace(/\D/g, '').slice(0,8);
+
+  async function buscarCep() {
+    const cep = cepDigits();
+    if (cep.length !== 8 || cep === ultimoCepConsultado) return;
+    ultimoCepConsultado = cep;
+    cepAbort?.abort();
+    const controller = new AbortController();
+    cepAbort = controller;
+    setCepStatus('Consultando o CEP...', 'busca');
+    try {
+      const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`, {
+        signal:controller.signal, headers:{'Accept':'application/json'}
+      });
+      if (!response.ok) throw Error('Serviço indisponível');
+      const data = await response.json();
+      if (controller.signal.aborted || cepDigits() !== cep) return;
+      if (data.erro === true || data.erro === 'true') {
+        setCepStatus('CEP não encontrado. Verifique os números ou preencha manualmente.', 'erro');
+        return;
+      }
+      if (typeof data.logradouro === 'string' && data.logradouro.trim()) addressForm.elements.rua.value = data.logradouro.trim();
+      if (typeof data.bairro === 'string' && data.bairro.trim()) addressForm.elements.bairro.value = data.bairro.trim();
+      if (typeof data.localidade === 'string' && data.localidade.trim()) {
+        addressForm.elements.cidade.value = `${data.localidade.trim()}${data.uf ? ' - '+data.uf.trim() : ''}`;
+      }
+      setCepStatus('Endereço encontrado! Confira rua e bairro e informe o número da casa.', 'ok');
+      addressForm.elements.numero.focus();
+    } catch (err) {
+      if (err.name === 'AbortError') return;
+      if (cepDigits() !== cep) return;
+      ultimoCepConsultado = ''; // permite tentar novamente após falha de rede
+      setCepStatus('Não foi possível buscar agora. Digite o endereço manualmente.', 'erro');
+    }
+  }
+
+  cepInput.addEventListener('input', () => {
+    const cep = cepDigits();
+    cepInput.value = cep.length > 5 ? `${cep.slice(0,5)}-${cep.slice(5)}` : cep;
+    if (cepAbort && cep.length !== 8) cepAbort.abort();
+    if (cep !== ultimoCepConsultado) {
+      ultimoCepConsultado = '';
+      if (cep.length === 8) buscarCep();
+      else setCepStatus(cep.length ? 'Complete os 8 dígitos do CEP.' : 'Digite o CEP para buscar rua, bairro e cidade automaticamente.');
+    }
+  });
+  cepInput.addEventListener('blur', buscarCep);
 
   $('#productGrid').addEventListener('click', ev => {
     const addButton = ev.target.closest('[data-add]'); if (addButton) add(addButton.dataset.add);
@@ -199,7 +263,7 @@
     const form = ev.currentTarget;
     if (!form.reportValidity()) return;
     if (!whatsappValido) {
-      toast('WhatsApp incompleto: confirme os 9 dígitos do celular no config.js.');
+      toast('Confira o número de WhatsApp configurado pela loja.');
       return;
     }
     const values = Object.fromEntries(new FormData(form).entries());
@@ -244,9 +308,9 @@
   $('#nav').addEventListener('click',e=>{if(e.target.closest('a')){$('#nav').classList.remove('open');menuButton.setAttribute('aria-expanded','false');}});
   $('#year').textContent = new Date().getFullYear();
   if (whatsappValido) {
-    $('#contactWhats').replaceChildren(Object.assign(document.createElement('a'),{href:`https://wa.me/${whatsapp}`,target:'_blank',rel:'noopener noreferrer',textContent:'Conversar pelo WhatsApp ↗'}));
+    $('#contactWhats').replaceChildren(Object.assign(document.createElement('a'),{href:`https://wa.me/${whatsapp}`,target:'_blank',rel:'noopener noreferrer',textContent:whatsappOitoDigitos?'WhatsApp: +55 (87) 9130-9425 ↗':'Conversar pelo WhatsApp ↗'}));
   } else if (whatsapp) {
-    $('#contactWhats').textContent = 'WhatsApp: (87) 9130-9425 — falta confirmar 1 dígito';
+    $('#contactWhats').textContent = 'WhatsApp da loja: confira o número no config.js';
   }
   if (cfg.instagram) {
     const insta = String(cfg.instagram).replace(/^@/,'').replace(/[^a-zA-Z0-9._]/g,'');

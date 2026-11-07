@@ -2,7 +2,7 @@
 
 Site responsivo de brownies artesanais, rosa-claro e lilás, com embalagem corrigida (brownie na faixa, não brigadeiro) e fotos diferentes para cada sabor (Tradicional, Chocolate com Nozes e Chocolate Branco), cardápio, carrinho, formulário de entrega, mensagem de pedido para o WhatsApp e **Pix copia e cola + QR Code (quando configurados)**.
 
-> **WHATSAPP PENDENTE DE CONFIRMAÇÃO:** foi informado `+55 87 9130-9425` (8 dígitos depois do DDD). Celulares brasileiros normalmente têm **9 dígitos depois do DDD**. O número foi anotado em `config.js` sem inventar o dígito faltante; por segurança, o envio de pedidos pelo WhatsApp fica **desativado até a correção**. Exemplo de formato completo: `+55 87 9XXXX-XXXX`.
+> **WhatsApp informado:** `+55 87 9130-9425` (8 dígitos após o DDD). O botão de pedido usa *exatamente* esse número, sem acrescentar nenhum dígito. Isso elimina a mensagem que bloqueava a finalização, mas **não garante que esse número esteja cadastrado no WhatsApp**. Confirme o contato antes de publicar: celulares brasileiros normalmente têm 9 dígitos após o DDD, enquanto algumas linhas comerciais podem ter 8.
 
 > **LEIA ANTES DE PUBLICAR:** o site é estático. A loja precisa confirmar manualmente os pedidos, estoque, taxa de entrega e pagamentos pelo WhatsApp. O GitHub Pages **não** guarda pedidos nem verifica Pix automaticamente. Não deixe a chave Pix, o WhatsApp e os preços de exemplo sem revisão.
 
@@ -24,7 +24,7 @@ Documentação: https://docs.github.com/pt/pages/getting-started-with-github-pag
 Abra **`config.js`** e edite somente as configurações da loja:
 
 ```js
-whatsapp: "558791309425", // informado, mas INCOMPLETO; confirmar dígito faltante
+whatsapp: "558791309425", // informado; confirme que este número está cadastrado no WhatsApp
 instagram: "sua_doceria",
 pixChave: "sua-chave-pix", // chave da conta que recebe o dinheiro
 pixNome: "NOME DO RECEBEDOR",
@@ -43,7 +43,7 @@ Deixe `taxaEntrega: null`. O carrinho monta o pedido, mas o Pix **não aparece**
 
 ## Como o pedido funciona nesta versão
 
-1. Cliente escolhe produtos, adiciona quantidades ao carrinho e informa nome, WhatsApp e endereço.
+1. Cliente escolhe produtos, adiciona quantidades ao carrinho e informa nome e WhatsApp. Ao digitar 8 dígitos de CEP, o formulário consulta o **ViaCEP** automaticamente e preenche rua, bairro e cidade/UF. O número e complemento da casa continuam manuais. Se o serviço falhar ou não tiver a rua, o usuário pode digitar o endereço manualmente.
 2. O site sugere entrega para o dia seguinte em horário local de Pernambuco, ou para o segundo dia seguinte após `horaLimite`.
 3. Cliente clica em **Enviar pedido pelo WhatsApp**. O site abre a conversa com mensagem pronta; **o cliente precisa enviar a mensagem**.
 4. Com WhatsApp, Pix e taxa de entrega configurados, o site mostra QR Code Pix e código copia e cola com o valor dos produtos + frete.
@@ -60,7 +60,7 @@ doce-momento-github/
 ├── css/
 │   └── style.css         # Cores, fontes, layout e responsividade
 ├── js/
-│   ├── app.js            # Carrinho, formulário, Pix e WhatsApp
+│   ├── app.js            # Carrinho, formulário, ViaCEP, Pix e WhatsApp
 │   └── qr-matrix.js      # Gerador local do QR Code (MIT)
 ├── assets/
 │   ├── brownie-tradicional.webp  # Foto do tradicional
@@ -81,3 +81,9 @@ doce-momento-github/
 É preciso um **backend** (por exemplo, Supabase/Firebase + função serverless), um provedor de pagamento Pix com API/webhook e proteção de acesso a pedidos. GitHub Pages continua hospedando o visual, mas a parte financeira deve ficar em servidor seguro.
 
 Desenvolvido para personalização pela **Dev Kayko**. Fotos do material gráfico são ilustrações, não fotos de produtos reais já vendidos.
+
+## CEP automático
+
+O formulário utiliza o serviço gratuito **ViaCEP** (`https://viacep.com.br/ws/CEP/json/`). O navegador envia somente o CEP à API quando ele possui oito dígitos; não envia nome, telefone, número da casa nem complemento. Se o CEP não for localizado ou o serviço ficar indisponível, o pedido continua possível com preenchimento manual. O cliente deve conferir a rua, bairro, cidade e número antes de enviar. O serviço não calcula frete nem verifica a cobertura de entrega.
+
+Documentação: https://viacep.com.br/
