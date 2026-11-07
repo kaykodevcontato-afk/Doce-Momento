@@ -308,7 +308,7 @@
   $('#nav').addEventListener('click',e=>{if(e.target.closest('a')){$('#nav').classList.remove('open');menuButton.setAttribute('aria-expanded','false');}});
   $('#year').textContent = new Date().getFullYear();
   if (whatsappValido) {
-    $('#contactWhats').replaceChildren(Object.assign(document.createElement('a'),{href:`https://wa.me/${whatsapp}`,target:'_blank',rel:'noopener noreferrer',textContent:whatsappOitoDigitos?'WhatsApp: +55 (87) 9130-9425 ↗':'Conversar pelo WhatsApp ↗'}));
+    $('#contactWhats').replaceChildren(Object.assign(document.createElement('a'),{href:`https://wa.me/${whatsapp}`,target:'_blank',rel:'noopener noreferrer',textContent:'Conversar pelo WhatsApp ↗'}));
   } else if (whatsapp) {
     $('#contactWhats').textContent = 'WhatsApp da loja: confira o número no config.js';
   }

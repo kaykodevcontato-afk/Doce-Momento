@@ -7,11 +7,8 @@ window.LOJA = {
   nome: "Doce Momento",
   slogan: "Brownies artesanais feitos com carinho",
   cidade: "Arcoverde - PE",
-  // Contato informado: +55 87 9130-9425 (8 dígitos locais).
-  // IMPORTANTE: confira se esse número está cadastrado no WhatsApp.
-  // Alguns números comerciais têm 8 dígitos; não acrescentamos um 9 sem confirmação.
-  // Formato: país 55 + DDD (2 dígitos) + número local (8 ou 9 dígitos).
-  whatsapp: "558791309425",
+  // Número destinado aos pedidos (não é exibido na página, só usado no link).
+  whatsapp: "5587991309425",
   instagram: "",
 
   // Pix em conta bancária do proprietário: CPF, CNPJ, telefone, e-mail ou chave aleatória.

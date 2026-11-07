@@ -2,7 +2,7 @@
 
 Site responsivo de brownies artesanais, rosa-claro e lilás, com embalagem corrigida (brownie na faixa, não brigadeiro) e fotos diferentes para cada sabor (Tradicional, Chocolate com Nozes e Chocolate Branco), cardápio, carrinho, formulário de entrega, mensagem de pedido para o WhatsApp e **Pix copia e cola + QR Code (quando configurados)**.
 
-> **WhatsApp informado:** `+55 87 9130-9425` (8 dígitos após o DDD). O botão de pedido usa *exatamente* esse número, sem acrescentar nenhum dígito. Isso elimina a mensagem que bloqueava a finalização, mas **não garante que esse número esteja cadastrado no WhatsApp**. Confirme o contato antes de publicar: celulares brasileiros normalmente têm 9 dígitos após o DDD, enquanto algumas linhas comerciais podem ter 8.
+> **WhatsApp de pedidos:** `+55 87 99130-9425`, configurado em `config.js`. O número não aparece como texto na página; o botão apenas abre a conversa.
 
 > **LEIA ANTES DE PUBLICAR:** o site é estático. A loja precisa confirmar manualmente os pedidos, estoque, taxa de entrega e pagamentos pelo WhatsApp. O GitHub Pages **não** guarda pedidos nem verifica Pix automaticamente. Não deixe a chave Pix, o WhatsApp e os preços de exemplo sem revisão.
 
@@ -24,7 +24,7 @@ Documentação: https://docs.github.com/pt/pages/getting-started-with-github-pag
 Abra **`config.js`** e edite somente as configurações da loja:
 
 ```js
-whatsapp: "558791309425", // informado; confirme que este número está cadastrado no WhatsApp
+whatsapp: "5587991309425", // link de pedidos; número não aparece na página
 instagram: "sua_doceria",
 pixChave: "sua-chave-pix", // chave da conta que recebe o dinheiro
 pixNome: "NOME DO RECEBEDOR",
