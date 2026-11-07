@@ -56,3 +56,41 @@
 @media(max-width:460px) {
   .hero-seal {font-size: .62rem; padding: 10px 12px;}
 }
+
+/* FOTO PRINCIPAL — MOLDURA QUADRADA (07/11/2026)
+   Para ajustar: border-radius controla os cantos; border controla a borda. */
+.hero-visual {
+  width: min(100%, 510px);
+  height: auto;
+  aspect-ratio: 1 / 1;
+  margin-inline: auto;
+}
+.hero-visual::before {
+  content: none;
+}
+.hero-photo {
+  inset: 12px;
+  border: 7px solid #fffafc;
+  border-radius: 24px;
+  background: #f4dce9;
+  box-shadow: 0 20px 48px rgba(98, 37, 85, .17);
+}
+.hero-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 48%;
+}
+.hero-seal {
+  right: -4px;
+  bottom: 6px;
+  border-radius: 14px;
+}
+@media(max-width:750px) {
+  .hero-visual {width: min(100%, 490px); height: auto; aspect-ratio: 1 / 1;}
+  .hero-photo {inset: 12px; border-radius: 20px; border-width: 6px;}
+  .hero-seal {right: 0; bottom: 3px;}
+}
+@media(max-width:460px) {
+  .hero-photo {inset: 8px; border-radius: 17px; border-width: 5px;}
+}
