@@ -11,6 +11,8 @@
   const validShipping = Number.isFinite(cfg.taxaEntrega) && cfg.taxaEntrega >= 0;
   const shipping = validShipping ? cfg.taxaEntrega : null;
   const whatsapp = String(cfg.whatsapp||'').replace(/\D/g, '');
+  // Segurança: não envia endereços de clientes para números brasileiros incompletos.
+  const whatsappValido = /^55[1-9]\d9\d{8}$/.test(whatsapp);
   let cart = {};
   let toastTimer;
   let orderId = '';
@@ -100,7 +102,9 @@
     $('#checkoutTotal').textContent = brl(subtotal()+(shipping||0));
     $('#pixPanel').hidden = true;
     $('#pixReady').hidden = true;
-    $('#orderHelp').textContent = whatsapp ? 'Você revisará a mensagem no WhatsApp antes de enviá-la.' : 'Configure o número da loja no arquivo config.js para ativar o envio.';
+    $('#orderHelp').textContent = whatsappValido
+      ? 'Você revisará a mensagem no WhatsApp antes de enviá-la.'
+      : 'WhatsApp da loja aguardando correção: confirme os 9 dígitos do celular após o DDD no arquivo config.js.';
     openPanel(checkoutModal);
   }
 
@@ -194,8 +198,8 @@
     if (!itemsCount()) return toast('Seu carrinho está vazio.');
     const form = ev.currentTarget;
     if (!form.reportValidity()) return;
-    if (whatsapp.length < 12 || whatsapp.length > 13) {
-      toast('WhatsApp da loja não configurado. Consulte o arquivo config.js.');
+    if (!whatsappValido) {
+      toast('WhatsApp incompleto: confirme os 9 dígitos do celular no config.js.');
       return;
     }
     const values = Object.fromEntries(new FormData(form).entries());
@@ -239,8 +243,10 @@
   });
   $('#nav').addEventListener('click',e=>{if(e.target.closest('a')){$('#nav').classList.remove('open');menuButton.setAttribute('aria-expanded','false');}});
   $('#year').textContent = new Date().getFullYear();
-  if (whatsapp.length>=12) {
+  if (whatsappValido) {
     $('#contactWhats').replaceChildren(Object.assign(document.createElement('a'),{href:`https://wa.me/${whatsapp}`,target:'_blank',rel:'noopener noreferrer',textContent:'Conversar pelo WhatsApp ↗'}));
+  } else if (whatsapp) {
+    $('#contactWhats').textContent = 'WhatsApp: (87) 9130-9425 — falta confirmar 1 dígito';
   }
   if (cfg.instagram) {
     const insta = String(cfg.instagram).replace(/^@/,'').replace(/[^a-zA-Z0-9._]/g,'');

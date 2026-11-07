@@ -7,8 +7,11 @@ window.LOJA = {
   nome: "Doce Momento",
   slogan: "Brownies artesanais feitos com carinho",
   cidade: "Arcoverde - PE",
-  // SOMENTE NÚMEROS, com DDI 55 e DDD. Ex.: "5587999999999"
-  whatsapp: "",
+  // Número informado: +55 87 9130-9425.
+  // ATENÇÃO: celular brasileiro exige 9 dígitos após o DDD; este possui 8.
+  // Confirme o dígito faltante antes de ativar pedidos por WhatsApp.
+  // Formato correto: "55879XXXXXXXX" (13 dígitos no total, sem espaços).
+  whatsapp: "558791309425",
   instagram: "",
 
   // Pix em conta bancária do proprietário: CPF, CNPJ, telefone, e-mail ou chave aleatória.
@@ -27,9 +30,10 @@ window.LOJA = {
 
   // PREÇOS ILUSTRATIVOS — altere para seus preços reais antes de divulgar.
   produtos: [
-    { id: "tradicional", nome: "Tradicional Cremoso", descricao: "Casquinha delicada, chocolate intenso e interior macio.", preco: 12.00, imagem: "assets/brownie-hero.webp", selo: "Mais pedido" },
-    { id: "chocolate", nome: "Duplo Chocolate", descricao: "Massa chocolatuda com recheio bem cremoso.", preco: 14.00, imagem: "assets/brownie-cremoso.webp", selo: "Extra cremoso" },
-    { id: "recheado", nome: "Brownie Recheado", descricao: "Textura irresistível e chocolate derretendo por dentro.", preco: 15.00, imagem: "assets/brownie-hero.webp", selo: "Especial" },
+    // Cada sabor possui sua foto exclusiva na pasta assets/.
+    { id: "tradicional", nome: "Tradicional", descricao: "O clássico brownie de chocolate, intenso e cremoso, com casquinha crocante.", preco: 12.00, imagem: "assets/brownie-tradicional.webp", selo: "Mais pedido" },
+    { id: "nozes", nome: "Chocolate com Nozes", descricao: "Brownie de chocolate cremoso com pedaços de nozes crocantes.", preco: 14.00, imagem: "assets/brownie-nozes.webp", selo: "Com nozes" },
+    { id: "branco", nome: "Chocolate Branco", descricao: "Brownie de chocolate com pedaços deliciosos de chocolate branco.", preco: 14.00, imagem: "assets/brownie-chocolate-branco.webp", selo: "Chocolate branco" },
     { id: "kit4", nome: "Kit com 4 Brownies", descricao: "Quatro unidades para dividir, presentear ou aproveitar.", preco: 44.00, imagem: "assets/embalagem-brownies.webp", selo: "Para presentear" }
   ]
 };

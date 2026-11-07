@@ -1,6 +1,8 @@
 # 🍫 Doce Momento — Landing page para GitHub Pages
 
-Site responsivo de brownies artesanais, rosa-claro e lilás, com embalagem corrigida (brownie na faixa, não brigadeiro) e fotos ilustrativas criadas para o projeto, cardápio, carrinho, formulário de entrega, mensagem de pedido para o WhatsApp e **Pix copia e cola + QR Code (quando configurados)**.
+Site responsivo de brownies artesanais, rosa-claro e lilás, com embalagem corrigida (brownie na faixa, não brigadeiro) e fotos diferentes para cada sabor (Tradicional, Chocolate com Nozes e Chocolate Branco), cardápio, carrinho, formulário de entrega, mensagem de pedido para o WhatsApp e **Pix copia e cola + QR Code (quando configurados)**.
+
+> **WHATSAPP PENDENTE DE CONFIRMAÇÃO:** foi informado `+55 87 9130-9425` (8 dígitos depois do DDD). Celulares brasileiros normalmente têm **9 dígitos depois do DDD**. O número foi anotado em `config.js` sem inventar o dígito faltante; por segurança, o envio de pedidos pelo WhatsApp fica **desativado até a correção**. Exemplo de formato completo: `+55 87 9XXXX-XXXX`.
 
 > **LEIA ANTES DE PUBLICAR:** o site é estático. A loja precisa confirmar manualmente os pedidos, estoque, taxa de entrega e pagamentos pelo WhatsApp. O GitHub Pages **não** guarda pedidos nem verifica Pix automaticamente. Não deixe a chave Pix, o WhatsApp e os preços de exemplo sem revisão.
 
@@ -22,7 +24,7 @@ Documentação: https://docs.github.com/pt/pages/getting-started-with-github-pag
 Abra **`config.js`** e edite somente as configurações da loja:
 
 ```js
-whatsapp: "5587999999999", // substitua pelo WhatsApp verdadeiro da loja
+whatsapp: "558791309425", // informado, mas INCOMPLETO; confirmar dígito faltante
 instagram: "sua_doceria",
 pixChave: "sua-chave-pix", // chave da conta que recebe o dinheiro
 pixNome: "NOME DO RECEBEDOR",
@@ -33,7 +35,7 @@ horaLimite: 18,
 
 **ATENÇÃO:** a chave Pix e os dados do recebedor inseridos em `config.js` serão **públicos na internet**. Isso é próprio de um Pix estático com chave pública; não insira senhas bancárias, tokens, credenciais privadas ou dados confidenciais nesse arquivo.
 
-Os **quatro produtos e preços são EXEMPLOS** para visualização. Edite o array `produtos` no `config.js` para colocar valores, nomes e sabores reais. Os produtos podem ter fotos diferentes: coloque a imagem na pasta `assets/` e ajuste o campo `imagem`.
+Os **quatro produtos e preços são EXEMPLOS** para visualização. Edite o array `produtos` no `config.js` para colocar valores, nomes e sabores reais. Cada produto já tem sua própria foto. Para trocar ou adicionar novos sabores, coloque a imagem na pasta `assets/` e ajuste o campo `imagem`.
 
 ### E se a taxa de entrega variar por bairro?
 
@@ -61,6 +63,9 @@ doce-momento-github/
 │   ├── app.js            # Carrinho, formulário, Pix e WhatsApp
 │   └── qr-matrix.js      # Gerador local do QR Code (MIT)
 ├── assets/
+│   ├── brownie-tradicional.webp  # Foto do tradicional
+│   ├── brownie-nozes.webp         # Foto do brownie com nozes
+│   ├── brownie-chocolate-branco.webp # Foto do chocolate branco
 │   ├── brownie-hero.webp
 │   ├── brownie-cremoso.webp
 │   ├── embalagem-brownies.webp
