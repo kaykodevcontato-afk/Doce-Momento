@@ -87,3 +87,7 @@ Desenvolvido para personalização pela **Dev Kayko**. Fotos do material gráfic
 O formulário utiliza o serviço gratuito **ViaCEP** (`https://viacep.com.br/ws/CEP/json/`). O navegador envia somente o CEP à API quando ele possui oito dígitos; não envia nome, telefone, número da casa nem complemento. Se o CEP não for localizado ou o serviço ficar indisponível, o pedido continua possível com preenchimento manual. O cliente deve conferir a rua, bairro, cidade e número antes de enviar. O serviço não calcula frete nem verifica a cobertura de entrega.
 
 Documentação: https://viacep.com.br/
+
+### Novo visual da foto principal
+A moldura em arco foi substituída por um recorte orgânico sem borda grossa.
+Para ajustar o formato, procure a seção `FOTO PRINCIPAL — NOVO DESIGN` no final de `css/style.css`.
