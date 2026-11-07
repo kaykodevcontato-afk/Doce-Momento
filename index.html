@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f9dce9">
+  <meta name="description" content="Brownies artesanais com casquinha por fora e chocolate cremoso por dentro. Encomende hoje para receber no dia seguinte em Arcoverde e região, mediante confirmação.">
+  <meta property="og:title" content="Doce Momento | Brownies artesanais">
+  <meta property="og:description" content="Um carinho em forma de brownie. Faça sua encomenda para o dia seguinte.">
+  <meta property="og:image" content="assets/brownie-hero.webp">
+  <title>Doce Momento | Brownies artesanais</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="config.js" defer></script>
+  <script src="js/qr-matrix.js" defer></script>
+  <script src="js/app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#sabores">Ir para os sabores</a>
+  <div class="announcement">♡ Feito com carinho, pensado para adoçar o seu dia ♡</div>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a href="#inicio" class="brand" aria-label="Doce Momento, início"><span class="brand-mark">♡</span><span class="brand-txt"><strong>Doce <i>Momento</i></strong><small>BROWNIES ARTESANAIS</small></span></a>
+      <nav id="nav" aria-label="Navegação principal">
+        <a href="#sabores">Sabores</a><a href="#como-funciona">Como funciona</a><a href="#embalagem">Embalagem</a><a href="#contato">Contato</a>
+      </nav>
+      <div class="nav-actions"><button class="cart-button" type="button" id="openCart" aria-label="Abrir carrinho">🛍 <span class="cart-count" id="cartCount">0</span> <span class="hide-sm">Meu pedido</span></button><button class="menu-button" id="menuButton" type="button" aria-label="Abrir menu" aria-expanded="false">☰</button></div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <div class="eyebrow"><span>✦</span> DOCINHO DO DIA, CARINHO PARA SEMPRE</div>
+          <h1>Uma explosão de <em>chocolate</em> em cada mordida.</h1>
+          <p class="hero-description">Brownies artesanais com <strong>casquinha por fora</strong> e <strong>recheio cremoso por dentro</strong>. O doce momento do seu dia começa aqui!</p>
+          <div class="hero-message">🚚 <span>Encomende hoje e receba no dia seguinte*</span></div>
+          <div class="hero-cta"><a class="btn btn-primary" href="#sabores">Escolher meus brownies <span aria-hidden="true">↗</span></a><a class="btn btn-outline" href="#como-funciona">Como pedir</a></div>
+          <p class="small-note">*Entrega sujeita à confirmação e ao horário-limite de pedidos.</p>
+          <div class="hero-stats"><div><strong>100%</strong><span>artesanal</span></div><div class="vline"></div><div><strong>♡</strong><span>feito com amor</span></div><div class="vline"></div><div><strong>+ chocolate</strong><span>em cada pedacinho</span></div></div>
+        </div>
+        <div class="hero-visual"><div class="hero-photo"><img src="assets/brownie-hero.webp" alt="Brownies empilhados com casquinha crocante e recheio cremoso escorrendo" fetchpriority="high"></div><div class="hero-seal"><span>✦</span> FELICIDADE<br>EM QUADRADOS <span>♡</span></div><span class="floating-heart heart-one">♡</span><span class="floating-heart heart-two">✳</span></div>
+      </div>
+      <div class="hero-bottom-wave" aria-hidden="true"></div>
+    </section>
+
+    <section class="benefit-strip" aria-label="Diferenciais"><div class="container benefit-grid"><div><span>🍫</span><p>Chocolate de verdade<br><small>Textura que surpreende</small></p></div><div><span>🎀</span><p>Embalagem charmosa<br><small>Perfeita para presentear</small></p></div><div><span>📦</span><p>Feito sob encomenda<br><small>Preparado para você</small></p></div></div></section>
+
+    <section class="section products-section" id="sabores">
+      <div class="container"><div class="section-head"><span class="eyebrow">ESCOLHA SEU FAVORITO ♡</span><h2>Um sabor para cada <em>momento</em></h2><p>Tem opções para matar a vontade ou presentear quem você ama.</p></div><div id="productGrid" class="product-grid"></div><p class="products-note">Valores e sabores sujeitos à disponibilidade. As fotos são ilustrativas.</p></div>
+    </section>
+
+    <section class="section how-section" id="como-funciona"><div class="container"><div class="section-head"><span class="eyebrow">FÁCIL, RÁPIDO E DELICIOSO</span><h2>Seu pedido em <em>3 passos</em></h2><p>Você escolhe, a gente prepara com carinho.</p></div><div class="steps"><article class="step"><span class="step-num">01</span><div class="step-icon">🍫</div><h3>Escolha seus brownies</h3><p>Selecione seus sabores e monte seu carrinho.</p></article><article class="step"><span class="step-num">02</span><div class="step-icon">📍</div><h3>Informe a entrega</h3><p>Preencha seus dados e o endereço para o dia previsto.</p></article><article class="step"><span class="step-num">03</span><div class="step-icon">💜</div><h3>Confirme e pague</h3><p>Envie o pedido no WhatsApp e, com o valor fechado, pague via Pix.</p></article></div><div class="center"><a class="btn btn-primary" href="#sabores">Fazer minha encomenda <span>→</span></a></div></div></section>
+
+    <section class="section story-section"><div class="container story-grid"><div class="story-photo"><img src="assets/brownie-cremoso.webp" alt="Brownie aberto exibindo chocolate cremoso por dentro e casquinha quebradiça por fora" loading="lazy"><div class="mini-tag">Casquinha por fora.<br><b>Amor por dentro.</b> ♡</div></div><div class="story-copy"><span class="eyebrow">O NOSSO SEGREDINHO</span><h2>O brownie que faz você fechar os olhos na <em>primeira mordida.</em></h2><p>Sabe aquela casquinha fininha que quebra delicadamente? E o centro úmido, chocolatudo e quase derretendo? É assim que imaginamos cada Doce Momento.</p><ul class="check-list"><li>♡ Chocolate intenso e textura cremosa</li><li>♡ Feito sob encomenda</li><li>♡ Ideal para dividir ou presentear</li></ul><a class="btn btn-light" href="#sabores">Quero experimentar ↗</a></div></div></section>
+
+    <section class="section packaging-section" id="embalagem"><div class="container packaging-grid"><div><span class="eyebrow">CARINHO ATÉ NA ENTREGA</span><h2>Uma caixinha cheia de <em>bons momentos</em></h2><p>A ideia é entregar os brownies em uma embalagem de isopor com uma faixa delicada da Doce Momento, inspirada na foto do projeto.</p><p>Para conservar a textura e o sabor, o acondicionamento e o transporte precisam ser definidos conforme o tempo e a temperatura da entrega.</p><div class="tag-row"><span>🎀 Feito para encantar</span><span>📦 Proteção no transporte</span></div></div><div class="packaging-photo"><img src="assets/embalagem-brownies.webp" alt="Sugestão visual de brownies em uma caixa de isopor branca com faixa rosa Doce Momento" loading="lazy"><span class="photo-badge">Referência de apresentação</span></div></div></section>
+
+    <section class="cta-section" id="contato"><div class="container cta-inner"><span class="eyebrow light">SEU DOCE MOMENTO ESTÁ TE ESPERANDO</span><h2>Deu vontade de <em>brownie?</em> ♡</h2><p>Monte sua caixinha e faça sua encomenda para o próximo dia disponível.</p><a class="btn btn-white" href="#sabores">Pedir meus brownies ↗</a><div class="city-pill">📍 Arcoverde – PE · Consulte a área de entrega</div></div></section>
+  </main>
+
+  <footer class="footer"><div class="container footer-grid"><div><a href="#inicio" class="brand footer-brand"><span class="brand-mark">♡</span><span class="brand-txt"><strong>Doce <i>Momento</i></strong><small>BROWNIES ARTESANAIS</small></span></a><p>Um pedacinho de carinho em cada brownie.</p></div><div><strong>Explore</strong><a href="#sabores">Cardápio</a><a href="#como-funciona">Como pedir</a><a href="#embalagem">Nossa embalagem</a></div><div><strong>Contato</strong><p id="contactWhats">WhatsApp em configuração</p><p id="contactInsta">Instagram em configuração</p><p>📍 Arcoverde, Pernambuco</p></div></div><div class="container footer-bottom"><span>© <span id="year">2026</span> Doce Momento. Todos os direitos reservados.</span><span>Desenvolvido por <a href="https://github.com/kaykodevcontato-afk" target="_blank" rel="noopener noreferrer">Dev Kayko</a> · Fotos ilustrativas</span></div></footer>
+
+  <div class="overlay" id="overlay" hidden></div>
+  <aside class="cart-drawer" id="cartDrawer" role="dialog" aria-modal="true" aria-labelledby="cartTitle" aria-hidden="true" inert><div class="drawer-header"><div><span class="eyebrow">SUA ENCOMENDA</span><h2 id="cartTitle">Meu carrinho 🛍</h2></div><button class="icon-button" type="button" id="closeCart" aria-label="Fechar carrinho">✕</button></div><div id="cartItems" class="cart-items"></div><div class="cart-footer"><div class="summary-line"><span>Produtos</span><strong id="cartSubtotal">R$ 0,00</strong></div><p class="fee-notice" id="cartFeeNotice">A taxa de entrega é calculada conforme configuração da loja.</p><button class="btn btn-primary full" type="button" id="startCheckout">Continuar pedido <span>→</span></button></div></aside>
+
+  <section class="checkout-modal" id="checkoutModal" role="dialog" aria-modal="true" aria-labelledby="checkoutTitle" aria-hidden="true" inert><div class="checkout-header"><div><span class="eyebrow">QUASE LÁ ♡</span><h2 id="checkoutTitle">Finalizar encomenda</h2></div><button class="icon-button" id="closeCheckout" type="button" aria-label="Fechar pedido">✕</button></div><div class="checkout-body"><div class="checkout-intro"><strong>📅 Data prevista: <span id="deliveryDate">—</span></strong><small>O pedido e a entrega só são confirmados após nossa resposta pelo WhatsApp.</small></div><form id="orderForm"><div class="field-grid"><label>Seu nome completo <input name="nome" required minlength="2" maxlength="80" autocomplete="name" placeholder="Como podemos chamar você?"></label><label>Seu WhatsApp <input name="telefone" required minlength="10" maxlength="20" inputmode="tel" autocomplete="tel" placeholder="(87) 99999-9999"></label><label>CEP <span class="optional">(opcional)</span><input name="cep" inputmode="numeric" maxlength="9" placeholder="56500-000" autocomplete="postal-code"></label><label>Bairro <input name="bairro" required maxlength="70" autocomplete="address-level3" placeholder="Seu bairro"></label><label class="wide">Rua / avenida <input name="rua" required maxlength="120" autocomplete="street-address" placeholder="Nome da rua"></label><label>Número <input name="numero" required maxlength="15" placeholder="Número ou S/N"></label><label>Complemento <span class="optional">(opcional)</span><input name="complemento" maxlength="100" placeholder="Casa, apto, bloco..."></label><label class="wide">Referência ou observações <span class="optional">(opcional)</span><textarea name="observacoes" maxlength="300" rows="2" placeholder="Ponto de referência, informações importantes..."></textarea></label></div><div class="order-total"><div><span>Produtos</span><strong id="checkoutSubtotal">R$ 0,00</strong></div><div><span>Entrega</span><strong id="checkoutShipping">A combinar</strong></div><div class="grand-total"><span>Total <small id="totalQualifier">(sem entrega)</small></span><strong id="checkoutTotal">R$ 0,00</strong></div></div><label class="confirm"><input type="checkbox" required> Concordo em compartilhar estes dados pelo WhatsApp da doceria para receber a entrega.</label><button class="btn btn-primary full" type="submit">1. Enviar pedido pelo WhatsApp ↗</button><p class="checkout-help" id="orderHelp">Você revisará a mensagem no WhatsApp antes de enviá-la.</p></form><div id="pixPanel" class="pix-panel" hidden><div class="divider-label">2. Pagamento por Pix</div><p id="pixExplain">Depois de enviar o pedido, faça o pagamento somente após confirmar a disponibilidade e a taxa de entrega.</p><div id="pixReady" hidden><div id="pixQr" class="pix-qr" aria-label="QR Code Pix"></div><strong id="pixAmount"></strong><label>Código Pix copia e cola<textarea readonly rows="4" id="pixCode"></textarea></label><button class="btn btn-outline full" type="button" id="copyPix">Copiar código Pix</button><p class="checkout-help">O QR e o código são gerados neste navegador. O pagamento não é confirmado automaticamente; encaminhe o comprovante pelo WhatsApp.</p></div></div></div></section>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
